@@ -71,7 +71,7 @@ def test_pets_have_name_age_type(browser):
     browser.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
     # Нажимаем на кнопку Мои питомцы
     browser.find_element(By.CSS_SELECTOR, '.nav-item  [href="/my_pets"]').click()
-    # нахоим все элементы с именами, породой и возрастом
+    # находим все элементы с именами, породой и возрастом
     # images = browser.find_elements(By.CSS_SELECTOR, '.card-deck .card-img-top')
     WebDriverWait(browser, 10).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, '.text-center tbody tr :nth-child(2)')))
@@ -97,7 +97,7 @@ def test_number_of_pets_equal_to_one_that_is_stated(browser):
     # находим элемент со строкой о количестве питомцев и убираем ненужную информацию
     number = int(browser.find_element(By.XPATH, '/html/body/div[1]/div/div[1]').text.split(": ")[1].split("\n")[0])
 
-    # нахоим всех питомцев с именами (чтоб ухнать сколько их всего)
+    # находим всех питомцев с именами (чтобы узнать сколько их всего)
     WebDriverWait(browser, 10).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, '.text-center tbody tr :nth-child(2)')))
     names = browser.find_elements(By.CSS_SELECTOR, '.text-center tbody tr :nth-child(2)')
@@ -116,14 +116,14 @@ def test_atlist_half_of_pets_have_photo(browser):
     browser.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
     # Нажимаем на кнопку Мои питомцы
     browser.find_element(By.CSS_SELECTOR, '.nav-item  [href="/my_pets"]').click()
-    # находим элементы со фото
+    # находим элементы с фото
     images = browser.find_elements(By.CSS_SELECTOR, '.text-center tbody tr :nth-child(1) img')
     number_of_photos = 0
     for i in range(len(images)):
         if (images[i].get_attribute('src') != ''):
             number_of_photos += 1
 
-    # находим всех питомцев с именами (чтоб узнать сколько их всего)
+    # находим всех питомцев с именами (чтобы узнать сколько их всего)
     WebDriverWait(browser, 10).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, '.text-center tbody tr :nth-child(2)')))
     names = browser.find_elements(By.CSS_SELECTOR, '.text-center tbody tr :nth-child(2)')
@@ -143,7 +143,7 @@ def test_my_pets_dont_have_same_name_age_type(browser):
     browser.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
     # Нажимаем на кнопку Мои питомцы
     browser.find_element(By.CSS_SELECTOR, '.nav-item  [href="/my_pets"]').click()
-    # нахоим все элементы с именами, породой и возрастом
+    # находим все элементы с именами, породой и возрастом
     # images = browser.find_elements(By.CSS_SELECTOR, '.card-deck .card-img-top')
     WebDriverWait(browser, 10).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, '.text-center tbody tr :nth-child(2)')))
@@ -151,17 +151,17 @@ def test_my_pets_dont_have_same_name_age_type(browser):
     descriptions = browser.find_elements(By.CSS_SELECTOR, '.text-center tbody tr :nth-child(3)')
     age = browser.find_elements(By.CSS_SELECTOR, '.text-center tbody tr :nth-child(4)')
 
-    # cоздаем список питомцев состоящий из кортежей, каждый из которых хранит имя, возраст и породу питомца
-    bd = []
+    # cоздаем список питомцев, состоящий из кортежей, каждый из которых хранит имя, возраст и породу питомца
+    sp = []
     for i in range(len(names)):
-        bd.append((names[i].text, descriptions[i].text, age[i].text))
-        print(bd[i])
+        sp.append((names[i].text, descriptions[i].text, age[i].text))
+        print(sp[i])
     # проверяем есть ли в списке одинаковые элементы
     all_elements_are_different = True
     for j in range (len(names)):
-        checking_element = bd[j]
+        checking_element = sp[j]
         for i in range(len(names)):
-            if checking_element == bd[i] and i !=j:
+            if checking_element == sp[i] and i !=j:
                 all_elements_are_different = False
 
     if (all_elements_are_different):
@@ -181,22 +181,22 @@ def test_my_pets_dont_have_same_name(browser):
     browser.find_element(By.CSS_SELECTOR, 'button[type="submit"]').click()
     # Нажимаем на кнопку Мои питомцы
     browser.find_element(By.CSS_SELECTOR, '.nav-item  [href="/my_pets"]').click()
-    # нахоим все элементы с именами, породой и возрастом
+    # находим все элементы с именами, породой и возрастом
     WebDriverWait(browser, 10).until(
         EC.visibility_of_element_located((By.CSS_SELECTOR, '.text-center tbody tr :nth-child(2)')))
     names = browser.find_elements(By.CSS_SELECTOR, '.text-center tbody tr :nth-child(2)')
 
     # cоздаем список питомцев состоящий из кортежей, каждый из которых хранит имя, возраст и породу питомца
-    bd = []
+    sp = []
     for i in range(len(names)):
-        bd.append((names[i].text))
-        print(bd[i])
+        sp.append((names[i].text))
+        print(sp[i])
     # проверяем есть ли в списке одинаковые элементы
     all_elements_are_different = True
     for j in range (len(names)):
-        checking_element = bd[j]
+        checking_element = sp[j]
         for i in range(len(names)):
-            if checking_element == bd[i] and i !=j:
+            if checking_element == sp[i] and i !=j:
                 all_elements_are_different = False
 
     if (all_elements_are_different):
